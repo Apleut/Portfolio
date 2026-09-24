@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Portfolio — example</title>
+<title>Apleut</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -34,8 +34,8 @@
       <h1>Howdy! I'm Apleut.</h1>
       <img
         class="circle-image-left"
-        alt="Placeholder headshot"
-        src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='176' height='176'%3E%3Crect width='176' height='176' fill='%232C2A30'/%3E%3Ccircle cx='88' cy='68' r='34' fill='%2398939E'/%3E%3Cellipse cx='88' cy='168' rx='58' ry='46' fill='%2398939E'/%3E%3C/svg%3E"
+        alt="Profile picture"
+        src="assets/profile-picture.gif"
       >
       <p class="about__lede">
         I'm a student developer who enjoys programming in python, working in Blender and Fusion360, and learning as much as I can along the way.
@@ -53,11 +53,23 @@
     <section class="panel is-active" id="panel-programming">
       <div class="entry">
         <p class="about__lede">
-          I primarily work with Python and HTML, with some light knowledge in JavaScript. I have experience working with AI and backend APIs, as well as frontend CSS.
+          I primarily work with Python and HTML, with some light knowledge in JavaScript. I have experience working with AI and backend APIs, as well as a bit of frontend CSS.
         </p>
         <h3 class="about__lede">
           Here are some of my projects:
         </h3>
+      </div>
+      <div class="entry">
+        <h2>Motio</h2>
+        <p>
+          A simple program that uses MediaPipe's facial recognition algorithm to track your face and adjust your webcam output according to your movements, keeping you centered at all times.
+        </p>
+        <div class="entry__meta">
+          <span class="tag tag--status">Released v1.0.0</span>
+          <span class="tag">Python</span>
+          <span class="tag">MediaPipe</span>
+          <span class="tag">DirectShow</span>
+        </div>
       </div>
       <div class="entry">
         <h2>Laminate</h2>
@@ -75,14 +87,27 @@
 
     <section class="panel" id="panel-artistry">
       <div class="entry">
-        <h2>Add your 3D designs</h2>
+        <h2>Realism Object Renders</h2>
         <p>
-          3D renders, designs, and models go here.
+          Mimicking real-world photos is one of my favorite styles of 3D art. Here are some examples of past renders I've done:
         </p>
         <div class="gallery">
-          <img class="gallery-item" alt="Placeholder render" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%231B191E'/%3E%3Cpolygon points='150,60 240,220 60,220' fill='%2398939E'/%3E%3C/svg%3E">
-          <img class="gallery-item" alt="Placeholder render" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%231B191E'/%3E%3Ccircle cx='150' cy='150' r='90' fill='%2398939E'/%3E%3C/svg%3E">
-          <img class="gallery-item" alt="Placeholder render" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%231B191E'/%3E%3Crect x='75' y='75' width='150' height='150' fill='%2398939E'/%3E%3C/svg%3E">
+          <img class="gallery-item" alt="Flashlight render" src="assets/flashlight.png">
+          <img class="gallery-item" alt="Bells render" src="assets/bells.png">
+          <img class="gallery-item" alt="Electrical box render" src="assets/electrical.png">
+          <img class="gallery-item" alt="Ninja star render" src="assets/shuriken.png">
+        </div>
+      </div>
+      <div class="entry">
+        <h2>Roblox Clan Icon Renders</h2>
+        <p>
+          Occasionally, I do paid commissions for Roblox military-simulator ('milsim') groups and clans. I've mostly worked with SEA Military divisions in the past.
+        </p>
+        <div class="gallery">
+          <img class="gallery-item" alt="Naval Auxiliary Unit" src="assets/nau.png">
+          <img class="gallery-item" alt="506th Airborne Regiment" src="assets/506.png">
+          <img class="gallery-item" alt="Naval Combat Division" src="assets/ncd.png">
+          <img class="gallery-item" alt="Southern Outlaws" src="assets/so.png">
         </div>
       </div>
     </section>
