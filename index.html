@@ -119,6 +119,54 @@
 </div>
 
 <script>
+
+(function () {
+  const text = 'apleut.dev';
+  const cursor = '▍';
+  const typingSpeed = 140;
+  const blinkSpeed = 800;
+  const blinkCount = 10;
+  const pauseAtEmpty = 500;
+  let i = 0;
+  let deleting = false;
+
+  function tick() {
+    if (!deleting) {
+      i++;
+      document.title = text.slice(0, i) + (i < text.length ? cursor : '');
+      if (i === text.length) {
+        runBlink();
+        return;
+      }
+    } else {
+      i--;
+      document.title = text.slice(0, i) + cursor;
+      if (i === 0) {
+        deleting = false;
+        setTimeout(tick, pauseAtEmpty);
+        return;
+      }
+    }
+    setTimeout(tick, typingSpeed);
+  }
+
+  function runBlink() {
+    let count = 0;
+    const timer = setInterval(() => {
+      document.title = count % 2 === 0 ? text : text + cursor;
+      count++;
+      if (count >= blinkCount) {
+        clearInterval(timer);
+        document.title = text;
+        deleting = true;
+        setTimeout(tick, typingSpeed);
+      }
+    }, blinkSpeed);
+  }
+
+  tick();
+})();
+
   const buttons = Array.from(document.querySelectorAll('.subnav__btn'));
   const panels = Object.fromEntries(
     ['programming', 'artistry'].map(id => [id, document.getElementById('panel-' + id)])
@@ -146,9 +194,6 @@
     if (active) moveIndicator(active);
   });
 
-  // --- lightbox ---
-  // event-delegated so it works for any .gallery-item, including ones
-  // added to the page later
 
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
