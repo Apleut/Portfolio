@@ -1,0 +1,373 @@
+:root {
+  --bg: #121014;
+  --bg-recessed: #0C0A0E;
+  --footer-bg: #1C1A1F;
+  --surface: #1B191E;
+  --border: #2C2A30;
+  --ink: #F2F1F3;
+  --muted: #98939E;
+  --accent: #8B5CF6;
+  --accent-ink: #17111F;
+  --footer-h: 264px;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+a { color: var(--accent); text-decoration: none; }
+code { color: var(--accent); border: 1px solid var(--border); padding: 2px 5px; border-radius: 8px;}
+
+* { box-sizing: border-box; }
+
+/* prevents mobile browsers from treating a quick tap as a text
+   selection/long-press on interactive elements, and removes the
+   gray tap-highlight flash and iOS's copy/lookup callout menu */
+button,
+.subnav__btn,
+.gallery-item,
+.footer__row {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------- reveal footer ---------- */
+
+.footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--footer-h);
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 24px calc(env(safe-area-inset-bottom, 0px));
+  background: var(--footer-bg);
+}
+
+.footer__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.footer__label {
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.footer__list { display: flex; flex-direction: column; }
+
+.footer__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.footer__label-text { font-family: var(--font-display); font-size: 15px; font-weight: 600; }
+.footer__value { color: var(--muted); font-size: 14px; }
+
+/* ---------- content wrapper: dot texture fills the side margins,
+   the reading column itself stays a clean solid surface on top ---------- */
+
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+  margin-bottom: var(--footer-h);
+  padding-top: env(safe-area-inset-top, 0px);
+  background-color: var(--bg-recessed);
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-attachment: fixed;
+  box-shadow: 0 24px 32px -12px rgba(0, 0, 0, 0.55);
+}
+
+.stage {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 90px 24px 70px;
+  background: var(--bg);
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(32px, 6vw, 46px);
+  line-height: 1.15;
+  margin: 0 0 16px;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 21px;
+  margin: 0 0 8px;
+}
+
+p {
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 15.5px;
+  max-width: 60ch;
+}
+
+/* ---------- about ---------- */
+
+.about__lede {
+  font-size: 17px;
+  color: var(--ink);
+  max-width: 56ch;
+}
+
+/* ---------- sub-nav ---------- */
+
+.subnav {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+
+.subnav__pill {
+  position: relative;
+  display: flex;
+  width: 100%;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.subnav__indicator {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: var(--tab-w, 0px);
+  border-radius: 10px;
+  background: var(--accent);
+  transform: translateX(var(--tab-x, 0px));
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1), width 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.subnav__btn {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: color 250ms ease;
+}
+
+.subnav__btn[aria-selected="true"] { color: var(--accent-ink); }
+
+.subnav__btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.panel { display: none; }
+.panel.is-active { display: block; animation: rise 380ms ease; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel.is-active { animation: none; }
+  .subnav__indicator { transition: none; }
+}
+
+/* ---------- entries ---------- */
+
+.entry {
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+}
+.entry:last-child { border-bottom: 1px solid var(--border); }
+
+.entry__meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.tag {
+  font-size: 12.5px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.tag--status {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (max-width: 480px) {
+  .stage { padding: 70px 18px 60px; }
+
+  .subnav__btn {
+    font-size: 12px;
+    padding: 9px 6px;
+  }
+
+  :root { --footer-h: 300px; }
+
+  .footer {
+    padding: 0 18px calc(env(safe-area-inset-bottom, 0px));
+  }
+
+  .footer__label {
+    margin-bottom: 10px;
+  }
+
+  .footer__row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 10px 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .subnav__btn {
+    font-size: 10.5px;
+    padding: 8px 4px;
+    letter-spacing: -0.01em;
+  }
+
+  :root { --footer-h: 320px; }
+}
+
+/* ---------- circular image utilities ----------
+   Drop an <img> with one of these classes directly inside a paragraph
+   or section - it floats to that side with text wrapping around it,
+   masked to a circle, with a soft drop shadow.
+
+   <img src="photo.jpg" alt="..." class="circle-image-left">
+   <p>Text wraps around the image...</p>
+*/
+
+.circle-image-left,
+.circle-image-right {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+  margin-bottom: 10px;
+}
+
+.circle-image-left {
+  float: left;
+  margin-right: 18px;
+}
+
+.circle-image-right {
+  float: right;
+  margin-left: 18px;
+}
+
+@media (max-width: 480px) {
+  .circle-image-left,
+  .circle-image-right {
+    width: 68px;
+    height: 68px;
+  }
+}
+
+/* ---------- gallery utilities ----------
+   Wrap a set of <img> tags in a .gallery container - they lay out in
+   a responsive grid, each one cropped to a square with rounded
+   corners and a soft drop shadow (same shadow language as the
+   circle-image utilities, just squared off).
+
+   <div class="gallery">
+     <img class="gallery-item" src="render-1.jpg" alt="...">
+     <img class="gallery-item" src="render-2.jpg" alt="...">
+   </div>
+*/
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.gallery-item {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  transition: transform 200ms ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-2px);
+}
+
+/* ---------- lightbox ---------- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: rgba(8, 7, 9, 0.88);
+}
+
+.lightbox.is-open {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 16px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
+}

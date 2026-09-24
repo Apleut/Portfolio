@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portfolio — example</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__label">Contact</div>
+    <div class="footer__list">
+      <a class="footer__row" href="mailto:me@apleut.dev">
+        <span class="footer__label-text">Email</span>
+        <span class="footer__value">me@apleut.dev</span>
+      </a>
+      <a class="footer__row" href="https://github.com/Apleut">
+        <span class="footer__label-text">GitHub</span>
+        <span class="footer__value">github.com/Apleut</span>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<div class="content-wrapper">
+  <main class="stage">
+
+    <section id="about">
+      <h1>Howdy! I'm Apleut.</h1>
+      <img
+        class="circle-image-left"
+        alt="Placeholder headshot"
+        src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='176' height='176'%3E%3Crect width='176' height='176' fill='%232C2A30'/%3E%3Ccircle cx='88' cy='68' r='34' fill='%2398939E'/%3E%3Cellipse cx='88' cy='168' rx='58' ry='46' fill='%2398939E'/%3E%3C/svg%3E"
+      >
+      <p class="about__lede">
+        I'm a student developer who enjoys programming in python, working in Blender and Fusion360, and learning as much as I can along the way.
+      </p>
+    </section>
+
+    <nav class="subnav" role="tablist" aria-label="Sections">
+      <div class="subnav__pill" id="pill">
+        <div class="subnav__indicator" id="indicator"></div>
+        <button class="subnav__btn" role="tab" aria-selected="true" data-panel="programming">Programming</button>
+        <button class="subnav__btn" role="tab" aria-selected="false" data-panel="artistry">3D Artistry</button>
+      </div>
+    </nav>
+
+    <section class="panel is-active" id="panel-programming">
+      <div class="entry">
+        <p class="about__lede">
+          I primarily work with Python and HTML, with some light knowledge in JavaScript. I have experience working with AI and backend APIs, as well as frontend CSS.
+        </p>
+        <h3 class="about__lede">
+          Here are some of my projects:
+        </h3>
+      </div>
+      <div class="entry">
+        <h2>Laminate</h2>
+        <p>
+          A CLI that turns raw <code>git log</code> output into a keep-a-changelog-style changelog using a small LLM that runs entirely
+          on-device, so no commit history ever leaves your machine.
+        </p>
+        <div class="entry__meta">
+          <span class="tag tag--status">In progress</span>
+          <span class="tag">Python</span>
+          <span class="tag">Typer</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-artistry">
+      <div class="entry">
+        <h2>Add your 3D designs</h2>
+        <p>
+          3D renders, designs, and models go here.
+        </p>
+        <div class="gallery">
+          <img class="gallery-item" alt="Placeholder render" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%231B191E'/%3E%3Cpolygon points='150,60 240,220 60,220' fill='%2398939E'/%3E%3C/svg%3E">
+          <img class="gallery-item" alt="Placeholder render" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%231B191E'/%3E%3Ccircle cx='150' cy='150' r='90' fill='%2398939E'/%3E%3C/svg%3E">
+          <img class="gallery-item" alt="Placeholder render" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%231B191E'/%3E%3Crect x='75' y='75' width='150' height='150' fill='%2398939E'/%3E%3C/svg%3E">
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+  const buttons = Array.from(document.querySelectorAll('.subnav__btn'));
+  const panels = Object.fromEntries(
+    ['programming', 'artistry'].map(id => [id, document.getElementById('panel-' + id)])
+  );
+  const indicator = document.getElementById('indicator');
+
+  function moveIndicator(btn) {
+    indicator.style.setProperty('--tab-x', btn.offsetLeft - 4 + 'px');
+    indicator.style.setProperty('--tab-w', btn.offsetWidth + 'px');
+  }
+
+  function activate(panelId, btn) {
+    buttons.forEach(b => b.setAttribute('aria-selected', String(b === btn)));
+    Object.entries(panels).forEach(([id, el]) => el.classList.toggle('is-active', id === panelId));
+    moveIndicator(btn);
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => activate(btn.dataset.panel, btn));
+  });
+
+  window.addEventListener('load', () => moveIndicator(buttons[0]));
+  window.addEventListener('resize', () => {
+    const active = buttons.find(b => b.getAttribute('aria-selected') === 'true');
+    if (active) moveIndicator(active);
+  });
+
+  // --- lightbox ---
+  // event-delegated so it works for any .gallery-item, including ones
+  // added to the page later
+
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+
+  function openLightbox(src, alt) {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || '';
+    lightbox.classList.add('is-open');
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('is-open');
+    lightboxImg.src = '';
+  }
+
+  document.addEventListener('click', (e) => {
+    const item = e.target.closest('.gallery-item');
+    if (item) {
+      openLightbox(item.src, item.alt);
+      return;
+    }
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+
+</body>
+</html>
