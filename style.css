@@ -8,6 +8,7 @@
   --muted: #98939E;
   --accent: #8B5CF6;
   --accent-ink: #17111F;
+  --accent-muted: #997fd4;
   --footer-h: 264px;
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -74,7 +75,18 @@ html::-webkit-scrollbar {
   font-size: 12.5px;
   font-weight: 600;
   color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.footer__copyright__label {
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--accent-muted);
   margin-bottom: 14px;
+  text-align: center;
+  padding: 6px 0;
+  border-top: 1px solid var(--border);
 }
 
 .footer__list { display: flex; flex-direction: column; }
