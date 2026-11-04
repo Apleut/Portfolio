@@ -109,6 +109,16 @@
         </div>
       </div>
       <div class="entry">
+        <h2>Stylized Renders</h2>
+        <p>
+          Recently, I've been exploring stylized and cartoonish 3D art. Here are some examples of what I've made so far:
+        </p>
+        <div class="gallery">
+          <img class="gallery-item" alt="Storybook-style medieval hut render" src="assets/hut.png">
+          <img class="gallery-item" alt="Cartoon-outlined teacup render" src="assets/tea.png">
+        </div>
+      </div>
+      <div class="entry">
         <h2>Roblox Clan Icon Renders</h2>
         <p>
           Occasionally, I do paid commissions for Roblox military-simulator ('milsim') groups and clans. I've mostly worked with SEA Military divisions in the past.
@@ -216,8 +226,20 @@
 
   function closeLightbox() {
     lightbox.classList.remove('is-open');
-    lightboxImg.src = '';
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      lightboxImg.src = '';
+    }
   }
+
+  lightbox.addEventListener('transitionend', (e) => {
+    if (
+      e.target === lightbox &&
+      e.propertyName === 'opacity' &&
+      !lightbox.classList.contains('is-open')
+    ) {
+      lightboxImg.src = '';
+    }
+  });
 
   document.addEventListener('click', (e) => {
     const item = e.target.closest('.gallery-item');
