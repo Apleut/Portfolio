@@ -294,33 +294,31 @@ p {
    or section - it floats to that side with text wrapping around it,
    masked to a circle, with a soft drop shadow.
 
-   <img src="photo.jpg" alt="..." class="circle-image-left">
+   <img src="photo.jpg" alt="..." class="wrapped-image-left">
    <p>Text wraps around the image...</p>
 */
 
-.circle-image-left,
-.circle-image-right {
+.wrapped-image-left,
+.wrapped-image-right {
   width: 120px;
   height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+  object-fit: fill;
   margin-bottom: 10px;
 }
 
-.circle-image-left {
+.wrapped-image-left {
   float: left;
-  margin-right: 18px;
+  margin-right: 8px;
 }
 
-.circle-image-right {
+.wrapped-image-right {
   float: right;
-  margin-left: 18px;
+  margin-left: 8px;
 }
 
 @media (max-width: 480px) {
-  .circle-image-left,
-  .circle-image-right {
+  .wrapped-image-left,
+  .wrapped-image-right {
     width: 68px;
     height: 68px;
   }
@@ -330,7 +328,7 @@ p {
    Wrap a set of <img> tags in a .gallery container - they lay out in
    a responsive grid, each one cropped to a square with rounded
    corners and a soft drop shadow (same shadow language as the
-   circle-image utilities, just squared off).
+   wrapped-image utilities, just squared off).
 
    <div class="gallery">
      <img class="gallery-item" src="render-1.jpg" alt="...">
